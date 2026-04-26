@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sui株式会社</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --forest:#2d4a3e;
+  --moss:#4a6741;
+  --leaf:#6b8f5e;
+  --sage:#8faf82;
+  --mist:#c8dbbf;
+  --dew:#e8f2e3;
+  --cream:#f7f5f0;
+  --bark:#5c4a35;
+  --stone:#8a8278;
+  --white:#ffffff;
+}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--forest);overflow-x:hidden;}
+
+/* NAV */
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3.5rem;position:fixed;top:0;width:100%;z-index:200;background:rgba(247,245,240,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(107,143,94,0.15);}
+.logo{display:flex;align-items:center;gap:0.6rem;}
+.logo-mark{width:28px;height:28px;}
+.logo-text{font-family:'Noto Serif JP',serif;font-size:1.25rem;font-weight:600;color:var(--forest);letter-spacing:0.06em;}
+.logo-sub{font-size:0.65rem;color:var(--stone);letter-spacing:0.15em;font-weight:300;}
+.nav-links{display:flex;gap:0;list-style:none;}
+.nav-btn{background:none;border:none;cursor:pointer;padding:0.5rem 1.1rem;font-family:'Noto Sans JP',sans-serif;font-size:0.8rem;color:var(--stone);letter-spacing:0.08em;transition:color 0.2s;font-weight:400;}
+.nav-btn:hover,.nav-btn.active{color:var(--forest);}
+.nav-btn.active{font-weight:500;border-bottom:1.5px solid var(--leaf);}
+.nav-cta{padding:0.55rem 1.4rem;background:var(--moss);color:var(--white);border:none;font-family:'Noto Sans JP',sans-serif;font-size:0.78rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;transition:background 0.2s;font-weight:400;}
+.nav-cta:hover{background:var(--forest);}
+
+/* PAGE SYSTEM */
+.page{display:none;animation:fadeIn 0.35s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ============ HOME ============ */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem 3.5rem;position:relative;z-index:2;}
+.hero-eyebrow{font-size:0.7rem;letter-spacing:0.3em;color:var(--sage);margin-bottom:1.8rem;font-weight:400;display:flex;align-items:center;gap:0.8rem;}
+.hero-eyebrow::before{content:'';display:inline-block;width:32px;height:1px;background:var(--sage);}
+.hero-title{font-family:'Noto Serif JP',serif;font-size:3.4rem;line-height:1.25;font-weight:300;margin-bottom:1.5rem;color:var(--forest);}
+.hero-title em{font-style:normal;color:var(--moss);font-weight:600;}
+.hero-sub{font-size:0.88rem;color:var(--stone);line-height:2;margin-bottom:2.5rem;font-weight:300;max-width:380px;}
+.hero-actions{display:flex;gap:1rem;align-items:center;}
+.btn-main{padding:0.9rem 2rem;background:var(--forest);color:var(--white);border:none;font-family:'Noto Sans JP',sans-serif;font-size:0.8rem;letter-spacing:0.12em;cursor:pointer;border-radius:2px;transition:background 0.2s;font-weight:400;}
+.btn-main:hover{background:var(--moss);}
+.btn-ghost{padding:0.9rem 1.8rem;background:none;border:1px solid var(--mist);color:var(--moss);font-family:'Noto Sans JP',sans-serif;font-size:0.8rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;transition:all 0.2s;font-weight:400;}
+.btn-ghost:hover{border-color:var(--sage);background:var(--dew);}
+
+.hero-right{position:relative;overflow:hidden;}
+.hero-illustration{width:100%;height:100%;position:relative;}
+.hero-bg-shape{position:absolute;inset:0;background:linear-gradient(160deg,var(--dew) 0%,var(--mist) 50%,#b5cfa8 100%);}
+
+/* SVG leaf deco */
+.leaf-deco{position:absolute;opacity:0.18;}
+
+.hero-stats{position:absolute;bottom:3rem;left:3.5rem;display:flex;gap:2.5rem;z-index:3;}
+.stat{border-left:2px solid var(--mist);padding-left:1rem;}
+.stat-num{font-family:'Noto Serif JP',serif;font-size:2rem;font-weight:300;color:var(--forest);}
+.stat-label{font-size:0.7rem;color:var(--stone);letter-spacing:0.1em;margin-top:0.15rem;}
+
+/* HOME SECTIONS */
+.section{padding:5.5rem 3.5rem;}
+.sec-label{font-size:0.68rem;letter-spacing:0.3em;color:var(--sage);margin-bottom:0.75rem;font-weight:400;display:flex;align-items:center;gap:0.75rem;}
+.sec-label::before{content:'';width:24px;height:1px;background:var(--sage);}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:2.1rem;font-weight:300;color:var(--forest);line-height:1.4;margin-bottom:1rem;}
+
+/* VALUES */
+.values{background:var(--dew);}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;margin-top:3rem;background:rgba(107,143,94,0.12);}
+.value-card{background:var(--white);padding:2.2rem 1.8rem;}
+.value-icon{width:44px;height:44px;margin-bottom:1.2rem;}
+.value-name{font-size:1rem;font-weight:500;color:var(--forest);margin-bottom:0.6rem;}
+.value-desc{font-size:0.82rem;color:var(--stone);line-height:1.85;font-weight:300;}
+
+/* SERVICES PREVIEW */
+.services-preview{background:var(--cream);}
+.svc-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:0;}
+.svc-row{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0;border-bottom:1px solid rgba(107,143,94,0.15);cursor:pointer;transition:padding-left 0.2s;}
+.svc-row:first-child{border-top:1px solid rgba(107,143,94,0.15);}
+.svc-row:hover{padding-left:0.6rem;}
+.svc-row-left{display:flex;align-items:center;gap:1.5rem;}
+.svc-num{font-family:'Noto Serif JP',serif;font-size:0.85rem;color:var(--sage);width:24px;}
+.svc-name{font-size:1rem;font-weight:500;color:var(--forest);}
+.svc-tag{font-size:0.72rem;color:var(--stone);margin-left:0.5rem;font-weight:300;}
+.svc-arrow{color:var(--sage);font-size:1rem;transition:transform 0.2s;}
+.svc-row:hover .svc-arrow{transform:translateX(4px);}
+
+/* CTA BAND */
+.cta-band{background:var(--forest);padding:4.5rem 3.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;}
+.cta-band-title{font-family:'Noto Serif JP',serif;font-size:2rem;font-weight:300;color:var(--dew);line-height:1.4;}
+.cta-band-title em{font-style:normal;color:var(--mist);}
+.btn-light{padding:0.9rem 2.2rem;background:var(--dew);color:var(--forest);border:none;font-family:'Noto Sans JP',sans-serif;font-size:0.8rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;font-weight:500;transition:background 0.2s;white-space:nowrap;}
+.btn-light:hover{background:var(--white);}
+
+/* ============ SERVICES PAGE ============ */
+.page-hero{padding:8rem 3.5rem 4rem;background:var(--dew);border-bottom:1px solid rgba(107,143,94,0.12);}
+.page-hero-inner{max-width:600px;}
+.page-tag{font-size:0.68rem;letter-spacing:0.3em;color:var(--sage);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.page-tag::before{content:'';width:24px;height:1px;background:var(--sage);}
+.page-title{font-family:'Noto Serif JP',serif;font-size:2.8rem;font-weight:300;color:var(--forest);margin-bottom:1rem;}
+.page-lead{font-size:0.9rem;color:var(--stone);line-height:2;font-weight:300;}
+
+.svc-cards{padding:4rem 3.5rem;display:flex;flex-direction:column;gap:2px;background:rgba(107,143,94,0.08);}
+.svc-card{background:var(--white);padding:2.5rem 2.8rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.svc-card-head{}
+.svc-card-num{font-family:'Noto Serif JP',serif;font-size:3rem;font-weight:300;color:var(--mist);line-height:1;margin-bottom:0.75rem;}
+.svc-card-name{font-size:1.2rem;font-weight:500;color:var(--forest);margin-bottom:0.5rem;}
+.svc-card-tag{display:inline-block;font-size:0.68rem;letter-spacing:0.1em;padding:0.25rem 0.75rem;background:var(--dew);color:var(--moss);border-radius:1px;}
+.svc-card-body{}
+.svc-card-desc{font-size:0.85rem;color:var(--stone);line-height:2;font-weight:300;margin-bottom:1.2rem;}
+.svc-features{list-style:none;display:flex;flex-direction:column;gap:0.4rem;}
+.svc-features li{font-size:0.8rem;color:var(--moss);display:flex;align-items:center;gap:0.5rem;}
+.svc-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--sage);flex-shrink:0;}
+
+.flow-section{padding:4rem 3.5rem;background:var(--cream);}
+.flow-title{font-family:'Noto Serif JP',serif;font-size:1.8rem;font-weight:300;color:var(--forest);margin-bottom:2.5rem;}
+.flow-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.flow-step{padding:1.5rem 1.2rem;position:relative;}
+.flow-step::after{content:'→';position:absolute;right:-0.5rem;top:1.8rem;color:var(--mist);font-size:1rem;}
+.flow-step:last-child::after{display:none;}
+.step-num{font-family:'Noto Serif JP',serif;font-size:0.75rem;color:var(--sage);margin-bottom:0.5rem;letter-spacing:0.1em;}
+.step-name{font-size:0.88rem;font-weight:500;color:var(--forest);margin-bottom:0.35rem;}
+.step-desc{font-size:0.78rem;color:var(--stone);line-height:1.7;font-weight:300;}
+
+/* ============ ABOUT PAGE ============ */
+.about-hero{padding:8rem 3.5rem 4rem;background:linear-gradient(160deg,var(--dew) 0%,var(--cream) 100%);}
+.about-philosophy{padding:4.5rem 3.5rem;background:var(--white);}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:2.5rem;}
+.phil-text{font-size:0.88rem;color:var(--stone);line-height:2.2;font-weight:300;}
+.phil-quote{font-family:'Noto Serif JP',serif;font-size:1.5rem;font-weight:300;color:var(--forest);line-height:1.7;padding:2rem;border-left:3px solid var(--mist);background:var(--dew);}
+
+.team-section{padding:4.5rem 3.5rem;background:var(--cream);}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;margin-top:2.5rem;background:rgba(107,143,94,0.1);}
+.team-card{background:var(--white);padding:2rem 1.8rem;}
+.team-avatar{width:64px;height:64px;border-radius:50%;background:var(--dew);border:2px solid var(--mist);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-family:'Noto Serif JP',serif;font-size:1.1rem;color:var(--moss);}
+.team-name{font-size:1rem;font-weight:500;color:var(--forest);margin-bottom:0.2rem;}
+.team-role{font-size:0.75rem;color:var(--sage);letter-spacing:0.08em;margin-bottom:0.8rem;}
+.team-bio{font-size:0.8rem;color:var(--stone);line-height:1.8;font-weight:300;}
+
+.info-section{padding:4.5rem 3.5rem;background:var(--dew);}
+.info-table{width:100%;margin-top:2rem;border-collapse:collapse;}
+.info-table tr{border-bottom:1px solid rgba(107,143,94,0.12);}
+.info-table td{padding:1rem 0;font-size:0.85rem;vertical-align:top;}
+.info-table td:first-child{width:180px;color:var(--stone);font-weight:400;letter-spacing:0.05em;}
+.info-table td:last-child{color:var(--forest);font-weight:300;line-height:1.7;}
+
+/* FOOTER */
+footer{background:var(--forest);padding:3rem 3.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;align-items:start;}
+.footer-brand .logo-text{color:var(--dew);}
+.footer-brand p{font-size:0.78rem;color:rgba(200,219,191,0.6);margin-top:0.75rem;line-height:1.8;font-weight:300;}
+.footer-col h4{font-size:0.7rem;letter-spacing:0.2em;color:var(--mist);margin-bottom:1rem;font-weight:400;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+.footer-col ul li{font-size:0.8rem;color:rgba(200,219,191,0.65);cursor:pointer;transition:color 0.2s;font-weight:300;}
+.footer-col ul li:hover{color:var(--dew);}
+.footer-bottom{background:var(--moss);padding:1rem 3.5rem;font-size:0.72rem;color:rgba(232,242,227,0.5);letter-spacing:0.08em;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <svg class="logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="14" cy="10" rx="5" ry="8" fill="#6b8f5e" opacity="0.7" transform="rotate(-15 14 10)"/>
+      <ellipse cx="14" cy="10" rx="5" ry="8" fill="#4a6741" opacity="0.6" transform="rotate(15 14 10)"/>
+      <line x1="14" y1="6" x2="14" y2="26" stroke="#2d4a3e" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="14" y1="14" x2="10" y2="18" stroke="#6b8f5e" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div class="logo-text">Sui</div>
+      <div class="logo-sub">株式会社</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><button class="nav-btn active" onclick="showPage('home',this)">ホーム</button></li>
+    <li><button class="nav-btn" onclick="showPage('services',this)">サービス</button></li>
+    <li><button class="nav-btn" onclick="showPage('about',this)">会社概要</button></li>
+    <li><button class="nav-btn" onclick="showPage('contact',this)">お問い合わせ</button></li>
+  </ul>
+  <button class="nav-cta" onclick="showPage('contact',null)">無料相談</button>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">CONSULTING × SUSTAINABILITY</p>
+      <h1 class="hero-title">自然に根ざした<br><em>経営の知恵</em>で、<br>未来を育てる。</h1>
+      <p class="hero-sub">Sui株式会社は、持続可能な成長を共に探求するコンサルティングファームです。自然の摂理に学び、本質的な課題解決を提供します。</p>
+      <div class="hero-actions">
+        <button class="btn-main" onclick="showPage('services',null)">サービスを見る</button>
+        <button class="btn-ghost" onclick="showPage('about',null)">会社について</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-illustration">
+        <div class="hero-bg-shape"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 500 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- Large background leaf -->
+          <ellipse cx="340" cy="220" rx="140" ry="220" fill="#4a6741" opacity="0.1" transform="rotate(-25 340 220)"/>
+          <ellipse cx="200" cy="350" rx="110" ry="180" fill="#6b8f5e" opacity="0.08" transform="rotate(20 200 350)"/>
+          <!-- Stems -->
+          <line x1="300" y1="580" x2="300" y2="80" stroke="#2d4a3e" stroke-width="1.5" opacity="0.25" stroke-linecap="round"/>
+          <line x1="300" y1="250" x2="220" y2="180" stroke="#2d4a3e" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+          <line x1="300" y1="320" x2="390" y2="230" stroke="#2d4a3e" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+          <line x1="300" y1="400" x2="210" y2="340" stroke="#2d4a3e" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+          <!-- Leaves -->
+          <ellipse cx="190" cy="170" rx="55" ry="35" fill="#6b8f5e" opacity="0.28" transform="rotate(-30 190 170)"/>
+          <ellipse cx="210" cy="160" rx="45" ry="28" fill="#8faf82" opacity="0.22" transform="rotate(-25 210 160)"/>
+          <ellipse cx="400" cy="215" rx="60" ry="36" fill="#4a6741" opacity="0.25" transform="rotate(35 400 215)"/>
+          <ellipse cx="390" cy="208" rx="50" ry="28" fill="#6b8f5e" opacity="0.2" transform="rotate(30 390 208)"/>
+          <ellipse cx="195" cy="325" rx="52" ry="32" fill="#8faf82" opacity="0.2" transform="rotate(-20 195 325)"/>
+          <!-- Small detail leaves -->
+          <ellipse cx="260" cy="130" rx="28" ry="18" fill="#c8dbbf" opacity="0.35" transform="rotate(-10 260 130)"/>
+          <ellipse cx="350" cy="450" rx="40" ry="24" fill="#6b8f5e" opacity="0.15" transform="rotate(40 350 450)"/>
+          <!-- Dew circles -->
+          <circle cx="175" cy="155" r="4" fill="#ffffff" opacity="0.5"/>
+          <circle cx="405" cy="200" r="3" fill="#ffffff" opacity="0.4"/>
+          <circle cx="258" cy="122" r="2.5" fill="#ffffff" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">200+</div><div class="stat-label">支援実績</div></div>
+    <div class="stat"><div class="stat-num">96%</div><div class="stat-label">顧客継続率</div></div>
+    <div class="stat"><div class="stat-num">12年</div><div class="stat-label">業界経験</div></div>
+  </div>
+
+  <section class="section values">
+    <p class="sec-label">OUR VALUES</p>
+    <h2 class="sec-title">Suiが大切にすること</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 44 44" fill="none"><ellipse cx="22" cy="18" rx="8" ry="13" fill="#c8dbbf" opacity="0.6" transform="rotate(-15 22 18)"/><ellipse cx="22" cy="18" rx="8" ry="13" fill="#8faf82" opacity="0.5" transform="rotate(15 22 18)"/><line x1="22" y1="14" x2="22" y2="40" stroke="#4a6741" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="value-name">根を張る思考</div>
+        <div class="value-desc">表面的な解決策より、根本原因の探求を。長く繁る木のように、土台からの変革を支援します。</div>
+      </div>
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="16" stroke="#8faf82" stroke-width="1.2" opacity="0.4"/><circle cx="22" cy="22" r="10" stroke="#6b8f5e" stroke-width="1" opacity="0.5"/><circle cx="22" cy="22" r="5" fill="#4a6741" opacity="0.4"/><circle cx="22" cy="22" r="2" fill="#2d4a3e"/></svg>
+        <div class="value-name">循環する関係</div>
+        <div class="value-desc">自然の生態系のように、クライアントとの関係を循環・共生の視点で構築します。</div>
+      </div>
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 44 44" fill="none"><path d="M10 34 Q22 10 34 34" stroke="#8faf82" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="22" cy="20" rx="7" ry="11" fill="#c8dbbf" opacity="0.5"/><circle cx="22" cy="34" r="3" fill="#4a6741" opacity="0.4"/></svg>
+        <div class="value-name">静かな誠実さ</div>
+        <div class="value-desc">雨が静かに大地に染み入るように、誠実さと透明性をもってクライアントと向き合います。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services-preview">
+    <p class="sec-label">SERVICES</p>
+    <h2 class="sec-title">提供するサービス</h2>
+    <div class="svc-list">
+      <div class="svc-row" onclick="showPage('services',null)">
+        <div class="svc-row-left"><span class="svc-num">01</span><span class="svc-name">経営戦略コンサルティング</span><span class="svc-tag">Strategy</span></div>
+        <span class="svc-arrow">→</span>
+      </div>
+      <div class="svc-row" onclick="showPage('services',null)">
+        <div class="svc-row-left"><span class="svc-num">02</span><span class="svc-name">組織・人材開発</span><span class="svc-tag">Organization</span></div>
+        <span class="svc-arrow">→</span>
+      </div>
+      <div class="svc-row" onclick="showPage('services',null)">
+        <div class="svc-row-left"><span class="svc-num">03</span><span class="svc-name">サステナビリティ経営支援</span><span class="svc-tag">Sustainability</span></div>
+        <span class="svc-arrow">→</span>
+      </div>
+      <div class="svc-row" onclick="showPage('services',null)">
+        <div class="svc-row-left"><span class="svc-num">04</span><span class="svc-name">DX・デジタル変革</span><span class="svc-tag">Digital</span></div>
+        <span class="svc-arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-title">まず、<em>話してみませんか。</em><br>初回相談は無料です。</div>
+    <button class="btn-light" onclick="showPage('contact',null)">無料相談を申し込む →</button>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text" style="color:var(--dew);font-family:'Noto Serif JP',serif;font-size:1.2rem;">Sui 株式会社</div>
+      <p>自然に根ざした経営の知恵で、<br>クライアントと共に未来を育てます。</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li onclick="showPage('services',null)">経営戦略</li>
+        <li onclick="showPage('services',null)">組織・人材開発</li>
+        <li onclick="showPage('services',null)">サステナビリティ</li>
+        <li onclick="showPage('services',null)">DX推進</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>COMPANY</h4>
+      <ul>
+        <li onclick="showPage('about',null)">会社概要</li>
+        <li onclick="showPage('about',null)">理念・ビジョン</li>
+        <li onclick="showPage('about',null)">チーム</li>
+        <li onclick="showPage('contact',null)">お問い合わせ</li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">© 2026 Sui株式会社. All rights reserved.</div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<div id="page-services" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-tag">SERVICES</p>
+      <h1 class="page-title">サービス一覧</h1>
+      <p class="page-lead">Sui株式会社は、自然の摂理に学んだ本質的なアプローチで、企業の持続的な成長を包括的にサポートします。</p>
+    </div>
+  </div>
+
+  <div class="svc-cards">
+    <div class="svc-card">
+      <div class="svc-card-head">
+        <div class="svc-card-num">01</div>
+        <div class="svc-card-name">経営戦略コンサルティング</div>
+        <div style="margin-top:0.5rem;"><span class="svc-card-tag">Strategy</span></div>
+      </div>
+      <div class="svc-card-body">
+        <p class="svc-card-desc">市場環境の変化を読み解き、貴社固有の強みを活かした中長期戦略を共に描きます。データ分析と現場との対話を組み合わせた、実行力のある戦略策定を提供します。</p>
+        <ul class="svc-features">
+          <li>事業ポートフォリオ最適化</li>
+          <li>新規事業・市場参入支援</li>
+          <li>競合分析・差別化戦略</li>
+          <li>中期経営計画策定</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-card-head">
+        <div class="svc-card-num">02</div>
+        <div class="svc-card-name">組織・人材開発</div>
+        <div style="margin-top:0.5rem;"><span class="svc-card-tag">Organization</span></div>
+      </div>
+      <div class="svc-card-body">
+        <p class="svc-card-desc">生態系のように多様性を持ち、互いに補完し合う組織づくりを支援します。人材の本来の力を引き出し、企業文化の土壌から整えます。</p>
+        <ul class="svc-features">
+          <li>組織設計・再編支援</li>
+          <li>人材評価制度の構築</li>
+          <li>リーダーシップ開発</li>
+          <li>企業文化の変革</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-card-head">
+        <div class="svc-card-num">03</div>
+        <div class="svc-card-name">サステナビリティ経営支援</div>
+        <div style="margin-top:0.5rem;"><span class="svc-card-tag">Sustainability</span></div>
+      </div>
+      <div class="svc-card-body">
+        <p class="svc-card-desc">ESG・SDGsへの対応を経営の核心として位置づけ、持続可能なビジネスモデルへの転換を支援します。自然との共生を軸に、長期的な企業価値向上を目指します。</p>
+        <ul class="svc-features">
+          <li>ESG戦略策定・開示支援</li>
+          <li>カーボンニュートラル計画</li>
+          <li>サプライチェーン改善</li>
+          <li>ステークホルダー対話設計</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-card-head">
+        <div class="svc-card-num">04</div>
+        <div class="svc-card-name">DX・デジタル変革</div>
+        <div style="margin-top:0.5rem;"><span class="svc-card-tag">Digital</span></div>
+      </div>
+      <div class="svc-card-body">
+        <p class="svc-card-desc">テクノロジーを手段として位置づけ、人と組織の変革と並走するDXを推進します。現場に根ざした実装支援で、デジタル変革を確実に定着させます。</p>
+        <ul class="svc-features">
+          <li>DX戦略・ロードマップ策定</li>
+          <li>業務プロセス改革</li>
+          <li>データ活用・AI導入支援</li>
+          <li>システム導入・定着化</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <section class="flow-section">
+    <h2 class="flow-title">支援の流れ</h2>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-num">STEP 01</div>
+        <div class="step-name">初回ヒアリング</div>
+        <div class="step-desc">課題・目標・背景を丁寧にお聞きします。無料でご相談いただけます。</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">STEP 02</div>
+        <div class="step-name">現状分析・診断</div>
+        <div class="step-desc">定量・定性の両面から現状を把握し、課題の根本を特定します。</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-name">戦略・施策立案</div>
+        <div class="step-desc">分析に基づいた具体的な戦略と実行計画を共に策定します。</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">STEP 04</div>
+        <div class="step-name">実行・伴走支援</div>
+        <div class="step-desc">現場に入り込み、実行フェーズも継続的にサポートします。</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-title">貴社の課題に、<em>最適なご提案</em>をします。</div>
+    <button class="btn-light" onclick="showPage('contact',null)">無料相談を申し込む →</button>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text" style="color:var(--dew);font-family:'Noto Serif JP',serif;font-size:1.2rem;">Sui 株式会社</div>
+      <p>自然に根ざした経営の知恵で、<br>クライアントと共に未来を育てます。</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li onclick="showPage('services',null)">経営戦略</li>
+        <li onclick="showPage('services',null)">組織・人材開発</li>
+        <li onclick="showPage('services',null)">サステナビリティ</li>
+        <li onclick="showPage('services',null)">DX推進</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>COMPANY</h4>
+      <ul>
+        <li onclick="showPage('about',null)">会社概要</li>
+        <li onclick="showPage('about',null)">理念・ビジョン</li>
+        <li onclick="showPage('contact',null)">お問い合わせ</li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">© 2026 Sui株式会社. All rights reserved.</div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<div id="page-about" class="page">
+  <div class="about-hero" style="position:relative;overflow:hidden;">
+    <svg style="position:absolute;right:0;top:0;height:100%;opacity:0.12;" viewBox="0 0 300 400" fill="none"><ellipse cx="200" cy="150" rx="120" ry="200" fill="#4a6741" transform="rotate(-20 200 150)"/><ellipse cx="120" cy="280" rx="90" ry="150" fill="#6b8f5e" transform="rotate(15 120 280)"/></svg>
+    <div class="page-hero-inner" style="position:relative;z-index:2;">
+      <p class="page-tag">ABOUT</p>
+      <h1 class="page-title">会社概要</h1>
+      <p class="page-lead">Sui株式会社は「水が低きに流れるように、本質へ向かう」という理念のもと、2012年に設立されたコンサルティングファームです。</p>
+    </div>
+  </div>
+
+  <section class="about-philosophy">
+    <p class="sec-label">PHILOSOPHY</p>
+    <h2 class="sec-title">私たちの理念</h2>
+    <div class="phil-grid">
+      <div>
+        <p class="phil-text">「Sui（水）」という名は、老子の「上善若水」—最善の在り方は水のようであること—から着想を得ています。水は低いところへ自然に流れ、あらゆる形に適応し、岩をも穿つ力を持ちます。</p>
+        <p class="phil-text" style="margin-top:1rem;">私たちは、このような柔軟さと粘り強さをもって、クライアントの本質的な課題に向き合います。自然の摂理に学び、持続可能な成長への道筋を共に探ります。</p>
+      </div>
+      <div class="phil-quote">
+        「上善若水。水善利萬物而不爭。」<br><br>
+        <span style="font-size:0.85rem;color:var(--stone);font-family:'Noto Sans JP',sans-serif;font-weight:300;">最善の在り方は水のよう。水は万物を利して争わない。<br>— 老子 道徳経</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <p class="sec-label">TEAM</p>
+    <h2 class="sec-title">メンバー紹介</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">田</div>
+        <div class="team-name">田中 〇〇</div>
+        <div class="team-role">代表取締役 / CEO</div>
+        <div class="team-bio">大手戦略コンサルティングファーム出身。20年以上の経営支援経験を持ち、サステナビリティ経営を専門とする。</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">山</div>
+        <div class="team-name">山本 〇〇</div>
+        <div class="team-role">取締役 / 組織開発部門</div>
+        <div class="team-bio">人材・組織開発のスペシャリスト。企業文化変革プロジェクトを多数リード。コーチング資格保有。</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">中</div>
+        <div class="team-name">中村 〇〇</div>
+        <div class="team-role">パートナー / DX部門</div>
+        <div class="team-bio">IT企業・スタートアップでの経験を活かし、テクノロジーと人の融合をテーマにDX推進を支援。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <p class="sec-label">COMPANY INFO</p>
+    <h2 class="sec-title">基本情報</h2>
+    <table class="info-table">
+      <tr><td>会社名</td><td>Sui株式会社</td></tr>
+      <tr><td>設立</td><td>2012年4月</td></tr>
+      <tr><td>代表者</td><td>代表取締役 田中 〇〇</td></tr>
+      <tr><td>所在地</td><td>〒000-0000 東京都〇〇区〇〇1-2-3</td></tr>
+      <tr><td>事業内容</td><td>経営戦略コンサルティング、組織・人材開発、サステナビリティ経営支援、DX推進支援</td></tr>
+      <tr><td>従業員数</td><td>42名（2026年4月現在）</td></tr>
+      <tr><td>主要取引先</td><td>上場企業・中堅企業を中心に200社以上</td></tr>
+    </table>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-title">一緒に、<em>新しい一歩</em>を踏み出しませんか。</div>
+    <button class="btn-light" onclick="showPage('contact',null)">無料相談を申し込む →</button>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text" style="color:var(--dew);font-family:'Noto Serif JP',serif;font-size:1.2rem;">Sui 株式会社</div>
+      <p>自然に根ざした経営の知恵で、<br>クライアントと共に未来を育てます。</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li onclick="showPage('services',null)">経営戦略</li>
+        <li onclick="showPage('services',null)">組織・人材開発</li>
+        <li onclick="showPage('services',null)">サステナビリティ</li>
+        <li onclick="showPage('services',null)">DX推進</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>COMPANY</h4>
+      <ul>
+        <li onclick="showPage('about',null)">会社概要</li>
+        <li onclick="showPage('about',null)">理念・ビジョン</li>
+        <li onclick="showPage('contact',null)">お問い合わせ</li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">© 2026 Sui株式会社. All rights reserved.</div>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-tag">CONTACT</p>
+      <h1 class="page-title">お問い合わせ</h1>
+      <p class="page-lead">初回のご相談は無料です。まずはお気軽にお声がけください。通常2営業日以内にご連絡いたします。</p>
+    </div>
+  </div>
+  <section style="padding:4rem 3.5rem;background:var(--white);max-width:680px;margin:0 auto;">
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+      <div>
+        <label style="display:block;font-size:0.78rem;color:var(--stone);letter-spacing:0.1em;margin-bottom:0.5rem;">お名前 *</label>
+        <input type="text" placeholder="山田 太郎" style="width:100%;padding:0.75rem 1rem;border:1px solid rgba(107,143,94,0.25);border-radius:2px;font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;color:var(--forest);background:var(--cream);outline:none;">
+      </div>
+      <div>
+        <label style="display:block;font-size:0.78rem;color:var(--stone);letter-spacing:0.1em;margin-bottom:0.5rem;">会社名</label>
+        <input type="text" placeholder="〇〇株式会社" style="width:100%;padding:0.75rem 1rem;border:1px solid rgba(107,143,94,0.25);border-radius:2px;font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;color:var(--forest);background:var(--cream);outline:none;">
+      </div>
+      <div>
+        <label style="display:block;font-size:0.78rem;color:var(--stone);letter-spacing:0.1em;margin-bottom:0.5rem;">メールアドレス *</label>
+        <input type="email" placeholder="example@company.co.jp" style="width:100%;padding:0.75rem 1rem;border:1px solid rgba(107,143,94,0.25);border-radius:2px;font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;color:var(--forest);background:var(--cream);outline:none;">
+      </div>
+      <div>
+        <label style="display:block;font-size:0.78rem;color:var(--stone);letter-spacing:0.1em;margin-bottom:0.5rem;">ご相談内容 *</label>
+        <textarea rows="5" placeholder="ご相談の背景・課題・ご希望などをお聞かせください。" style="width:100%;padding:0.75rem 1rem;border:1px solid rgba(107,143,94,0.25);border-radius:2px;font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;color:var(--forest);background:var(--cream);outline:none;resize:vertical;"></textarea>
+      </div>
+      <button class="btn-main" style="align-self:flex-start;padding:0.9rem 2.5rem;" onclick="sendPrompt('お問い合わせフォームの送信後のサンクスページも作ってください')">送信する →</button>
+    </div>
+  </section>
+  <div class="footer-bottom" style="background:var(--forest);color:rgba(232,242,227,0.5);padding:2rem 3.5rem;">© 2026 Sui株式会社. All rights reserved.</div>
+</div>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      if (b.textContent.trim() === {home:'ホーム',services:'サービス',about:'会社概要',contact:'お問い合わせ'}[id]) b.classList.add('active');
+    });
+  }
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
